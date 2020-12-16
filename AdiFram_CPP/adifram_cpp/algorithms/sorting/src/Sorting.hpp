@@ -11,7 +11,7 @@ namespace sorting {
         void insertionSort_numeric(std::vector<T>& inputList);
 
         template <typename T>
-        void mergeSort_numeric(std::vector<T>& inputList, std::vector<T>& result);
+        void mergeSort_numeric(std::vector<T>& inputList, std::vector<T>& result, int hybridThreshold);
     }
 }
 

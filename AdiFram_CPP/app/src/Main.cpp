@@ -35,7 +35,7 @@ int main() {
     resultVector.reserve(numOfElements);
 
     auto startTime = steady_clock::now();
-    sorting::singlethreaded::mergeSort_numeric(tempVector, resultVector);
+    sorting::singlethreaded::mergeSort_numeric(tempVector, resultVector, 11);
     auto endTime = steady_clock::now();
 
     printElementsInVector(resultVector);

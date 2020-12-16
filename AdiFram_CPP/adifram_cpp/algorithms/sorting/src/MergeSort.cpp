@@ -36,8 +36,8 @@ void mergeVectors(std::vector<T>& firstHalf, std::vector<T>& secondHalf, std::ve
 }
 
 template <typename T>
-void sorting::singlethreaded::mergeSort_numeric(std::vector<T>& inputList, std::vector<T>& result) {
-    if(inputList.size() > 1) {
+void sorting::singlethreaded::mergeSort_numeric(std::vector<T>& inputList, std::vector<T>& result, int hybridThreshold) {
+    if(inputList.size() > hybridThreshold) {
         //Initializing firstHalf and secondHalf with vector range constructor
         auto middleIterator = inputList.begin() + (int(inputList.size()) / 2);
         std::vector<T> firstHalf(inputList.begin(), middleIterator);
@@ -45,13 +45,20 @@ void sorting::singlethreaded::mergeSort_numeric(std::vector<T>& inputList, std::
 
         std::vector<T> firstHalfSorted;
         firstHalfSorted.reserve(firstHalf.size());
-        mergeSort_numeric(firstHalf, firstHalfSorted);
+        mergeSort_numeric(firstHalf, firstHalfSorted, hybridThreshold);
 
         std::vector<T> secondHalfSorted;
         secondHalfSorted.reserve(firstHalf.size());
-        mergeSort_numeric(secondHalf, secondHalfSorted);
+        mergeSort_numeric(secondHalf, secondHalfSorted, hybridThreshold);
 
         mergeVectors(firstHalfSorted, secondHalfSorted, result); 
+    }
+    //Base case
+    else if(inputList.size() > 0) {
+        insertionSort_numeric(inputList);
+
+        //Copying the input list over
+        result = inputList;
     }
     //Base case
     else {
