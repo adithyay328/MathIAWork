@@ -28,21 +28,27 @@ int main() {
 
     populateVectorWithRandomValues(vectorToSort);
 
-    std::vector<int> tempVector(vectorToSort);
-    printElementsInVector(tempVector);
+    for(int j = 1; j <= 3; j++) {
+        std::cout << "Trial " << j << ":" << std::endl;
 
-    std::vector<int> resultVector;
-    resultVector.reserve(numOfElements);
+        for(int i = 1; i < 40; i = i + 5) {
+            std::vector<int> tempVector(vectorToSort);
 
-    auto startTime = steady_clock::now();
-    sorting::singlethreaded::mergeSort_numeric(tempVector, resultVector, 11);
-    auto endTime = steady_clock::now();
+            std::vector<int> resultVector;
+            resultVector.reserve(numOfElements);
 
-    printElementsInVector(resultVector);
+            auto startTime = steady_clock::now();
+            //sorting::singlethreaded::mergeSort_numeric(tempVector, resultVector, i);
+            sorting::singlethreaded::selectionSort_numeric(vectorToSort);
+            auto endTime = steady_clock::now();
 
-    auto duration = duration_cast<microseconds>(endTime - startTime);
-    std::cout << duration.count();
-    std::cout << std::endl;
+            auto duration = duration_cast<microseconds>(endTime - startTime);
+            std::cout << i << ":" << duration.count();
+            std::cout << std::endl;
+        }
+
+        std::cout << std::endl;
+    }
 
     return 0;
 }
